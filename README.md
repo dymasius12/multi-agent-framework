@@ -32,20 +32,22 @@ You: answer / do the ownership pass         -> next round
 ### Diagram
 
 ```mermaid
+%%{init: {"flowchart": {"padding": 30, "nodeSpacing": 80, "rankSpacing": 90, "htmlLabels": true, "wrappingWidth": 300}, "themeVariables": {"fontSize": "18px"}}}%%
 flowchart TD
-    H["HUMAN (Decider)<br/>HUMAN_INBOX.md"]
-    G["CHATGPT (Executor)<br/>CHATGPT_INBOX.md"]
-    C["CLAUDE (Strategist + Reviewer)<br/>CLAUDE_INBOX.md"]
+    H["<b>HUMAN</b> (Decider)<br/>HUMAN_INBOX.md<br/>&nbsp;"]
+    G["<b>CHATGPT</b> (Executor)<br/>CHATGPT_INBOX.md<br/>&nbsp;"]
+    C["<b>CLAUDE</b> (Strategist + Reviewer)<br/>CLAUDE_INBOX.md<br/>&nbsp;"]
     H -->|"1. Run your inbox"| G
-    G -->|"2. hands off for review"| C
     H -.->|"3. Run your inbox"| C
+    G -->|"2. Hand off for review"| C
     C -->|"4a. REVISE"| G
     C -->|"4b. ACCEPT or needs decision"| H
     subgraph F["Shared source of truth"]
+        direction LR
         A["AGENTS.md<br/>rules + decision log"]
         B["BRIEF.md<br/>spec, log, review"]
         T["TRACKER.md<br/>task board"]
-        L["PROMPT_LOG.md + git log<br/>history"]
+        L["PROMPT_LOG.md<br/>+ git log"]
     end
     G --- F
     C --- F
@@ -74,6 +76,7 @@ Newest first. Add a row whenever the seed or this repo changes.
 
 | Date | Change |
 |---|---|
+| 2026-11-25 | Fixed clipped boxes in the Mermaid diagram (more padding, larger text area). |
 | 2026-11-25 | Added workflow diagram: Mermaid in README plus editable `diagrams/workflow.drawio`. |
 | 2026-11-25 | Added `templates/` (AGENTS, CLAUDE, BRIEF, TRACKER, PROJECT_README, workflow inboxes and prompt log). |
 | 2026-11-25 | Added `multi-agent-setup.md` seed and this README. |
