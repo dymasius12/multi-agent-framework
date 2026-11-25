@@ -29,6 +29,30 @@ You: answer / do the ownership pass         -> next round
 
 **Faster start:** instead of letting the agent generate the files, copy the contents of `templates/` into your project root (rename `PROJECT_README.md` to `README.md`) and tell the agent to fill in the placeholders from your five answers.
 
+### Diagram
+
+```mermaid
+flowchart TD
+    H["HUMAN (Decider)<br/>HUMAN_INBOX.md"]
+    G["CHATGPT (Executor)<br/>CHATGPT_INBOX.md"]
+    C["CLAUDE (Strategist + Reviewer)<br/>CLAUDE_INBOX.md"]
+    H -->|"1. Run your inbox"| G
+    G -->|"2. hands off for review"| C
+    H -.->|"3. Run your inbox"| C
+    C -->|"4a. REVISE"| G
+    C -->|"4b. ACCEPT or needs decision"| H
+    subgraph F["Shared source of truth"]
+        A["AGENTS.md<br/>rules + decision log"]
+        B["BRIEF.md<br/>spec, log, review"]
+        T["TRACKER.md<br/>task board"]
+        L["PROMPT_LOG.md + git log<br/>history"]
+    end
+    G --- F
+    C --- F
+```
+
+An editable draw.io version is at [`diagrams/workflow.drawio`](diagrams/workflow.drawio). Open it at [app.diagrams.net](https://app.diagrams.net) (File > Open from > Device), or with the draw.io extension in VS Code.
+
 ### Day to day
 
 - Your to-do list is one file: `workflow/HUMAN_INBOX.md`.
@@ -50,6 +74,7 @@ Newest first. Add a row whenever the seed or this repo changes.
 
 | Date | Change |
 |---|---|
+| 2026-11-25 | Added workflow diagram: Mermaid in README plus editable `diagrams/workflow.drawio`. |
 | 2026-11-25 | Added `templates/` (AGENTS, CLAUDE, BRIEF, TRACKER, PROJECT_README, workflow inboxes and prompt log). |
 | 2026-11-25 | Added `multi-agent-setup.md` seed and this README. |
 

@@ -1,0 +1,62 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="workflow" name="Workflow loop">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="640" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Multi-Agent Loop: one agent, one turn, then hand off" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="10" width="600" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="human" value="&lt;b&gt;HUMAN (Decider)&lt;/b&gt;&lt;br&gt;Sets goals, decides, supplies facts,&lt;br&gt;does the ownership pass, ships&lt;br&gt;&lt;i&gt;To-do: workflow/HUMAN_INBOX.md&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="310" y="60" width="280" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="chatgpt" value="&lt;b&gt;CHATGPT (Executor)&lt;/b&gt;&lt;br&gt;Researches, drafts, builds,&lt;br&gt;revises to spec, logs its work&lt;br&gt;&lt;i&gt;Inbox: workflow/CHATGPT_INBOX.md&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="260" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="claude" value="&lt;b&gt;CLAUDE (Strategist + Reviewer)&lt;/b&gt;&lt;br&gt;Writes specs, verifies, reviews,&lt;br&gt;keeps rules and status current&lt;br&gt;&lt;i&gt;Inbox: workflow/CLAUDE_INBOX.md&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="600" y="260" width="260" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" value="1. &quot;Run your inbox&quot;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="human" target="chatgpt">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="170" y="105"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="2. Done, writes review task into Claude's inbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="chatgpt" target="claude">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="170" y="310"/><mxPoint x="170" y="310"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="3. &quot;Run your inbox&quot; (Human triggers Claude)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;dashed=1;" edge="1" parent="1" source="human" target="claude">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="730" y="105"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="4a. REVISE: back to ChatGPT" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;strokeColor=#b85450;" edge="1" parent="1" source="claude" target="chatgpt">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="730" y="400"/><mxPoint x="170" y="400"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="4b. ACCEPT / needs decision: to Human" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="claude" target="human">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="660" y="105"/></Array></mxGeometry>
+        </mxCell>
+
+        <mxCell id="turn" value="&lt;b&gt;Every turn ends with:&lt;/b&gt;&lt;br&gt;PROMPT_LOG entry, next task in the other inbox, own inbox set to WAITING,&lt;br&gt;TRACKER + BRIEF updated, new decisions logged, commit [agent] TASK-ID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="430" width="820" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="files" value="&lt;b&gt;Shared source of truth (repo files)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="510" width="820" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="f1" value="AGENTS.md&lt;br&gt;rules + decision log" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="545" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="f2" value="BRIEF.md&lt;br&gt;spec, log, review" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="260" y="545" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="f3" value="TRACKER.md&lt;br&gt;task board" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="545" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="f4" value="PROMPT_LOG.md + git log&lt;br&gt;full history" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="660" y="545" width="180" height="50" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
