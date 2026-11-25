@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 640" width="920" height="640" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d32"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c62828"/></marker>
+  </defs>
+  <rect width="920" height="640" rx="16" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="460" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#111">Multi-Agent Loop: one agent, one turn, then hand off</text>
+
+  <!-- Human -->
+  <rect x="290" y="55" width="340" height="80" rx="12" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+  <text x="460" y="87" text-anchor="middle" font-size="17" font-weight="700" fill="#111">HUMAN (Decider)</text>
+  <text x="460" y="110" text-anchor="middle" font-size="14" fill="#333">workflow/HUMAN_INBOX.md</text>
+
+  <!-- ChatGPT -->
+  <rect x="50" y="245" width="290" height="90" rx="12" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+  <text x="195" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#111">CHATGPT (Executor)</text>
+  <text x="195" y="306" text-anchor="middle" font-size="14" fill="#333">workflow/CHATGPT_INBOX.md</text>
+
+  <!-- Claude -->
+  <rect x="570" y="245" width="300" height="90" rx="12" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+  <text x="720" y="282" text-anchor="middle" font-size="17" font-weight="700" fill="#111">CLAUDE (Strategist + Reviewer)</text>
+  <text x="720" y="306" text-anchor="middle" font-size="14" fill="#333">workflow/CLAUDE_INBOX.md</text>
+
+  <!-- 1: Human -> ChatGPT -->
+  <path d="M290,95 H120 V245" fill="none" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+  <text x="205" y="86" text-anchor="middle" font-size="14" fill="#111">1. Run your inbox</text>
+
+  <!-- 3: Human -> Claude (dashed) -->
+  <path d="M630,95 H830 V245" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+  <text x="730" y="86" text-anchor="middle" font-size="14" fill="#111">3. Run your inbox</text>
+
+  <!-- 2: ChatGPT -> Claude -->
+  <path d="M340,278 H570" fill="none" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+  <text x="455" y="268" text-anchor="middle" font-size="14" fill="#111">2. Hand off for review</text>
+
+  <!-- 4a: Claude -> ChatGPT (revise) -->
+  <path d="M570,312 H340" fill="none" stroke="#c62828" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="455" y="334" text-anchor="middle" font-size="14" fill="#c62828">4a. REVISE</text>
+
+  <!-- 4b: Claude -> Human -->
+  <path d="M610,245 V135" fill="none" stroke="#2e7d32" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="620" y="195" font-size="14" fill="#2e7d32">4b. ACCEPT or needs</text>
+  <text x="620" y="213" font-size="14" fill="#2e7d32">your decision</text>
+
+  <!-- links to shared files -->
+  <path d="M195,335 V415" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M720,335 V415" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="205" y="380" font-size="13" fill="#555">read + update</text>
+  <text x="730" y="380" font-size="13" fill="#555">read + update</text>
+
+  <!-- Shared files -->
+  <rect x="50" y="415" width="820" height="120" rx="12" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
+  <text x="460" y="440" text-anchor="middle" font-size="15" font-weight="700" fill="#111">Shared source of truth (repo files)</text>
+  <rect x="70" y="455" width="185" height="62" rx="8" fill="#fff" stroke="#9673a6"/>
+  <text x="162" y="481" text-anchor="middle" font-size="14" font-weight="700" fill="#111">AGENTS.md</text>
+  <text x="162" y="502" text-anchor="middle" font-size="13" fill="#444">rules + decision log</text>
+  <rect x="275" y="455" width="185" height="62" rx="8" fill="#fff" stroke="#9673a6"/>
+  <text x="367" y="481" text-anchor="middle" font-size="14" font-weight="700" fill="#111">BRIEF.md</text>
+  <text x="367" y="502" text-anchor="middle" font-size="13" fill="#444">spec, log, review</text>
+  <rect x="480" y="455" width="185" height="62" rx="8" fill="#fff" stroke="#9673a6"/>
+  <text x="572" y="481" text-anchor="middle" font-size="14" font-weight="700" fill="#111">TRACKER.md</text>
+  <text x="572" y="502" text-anchor="middle" font-size="13" fill="#444">task board</text>
+  <rect x="685" y="455" width="165" height="62" rx="8" fill="#fff" stroke="#9673a6"/>
+  <text x="767" y="481" text-anchor="middle" font-size="14" font-weight="700" fill="#111">PROMPT_LOG.md</text>
+  <text x="767" y="502" text-anchor="middle" font-size="13" fill="#444">+ git log (history)</text>
+
+  <!-- Every turn -->
+  <rect x="50" y="555" width="820" height="62" rx="12" fill="#f5f5f5" stroke="#999" stroke-width="1.5"/>
+  <text x="70" y="580" font-size="14" font-weight="700" fill="#111">Every turn ends with:</text>
+  <text x="70" y="602" font-size="13" fill="#333">log entry, next task in the other inbox, own inbox set to WAITING, TRACKER + BRIEF updated, commit [agent] TASK-ID</text>
+</svg>
